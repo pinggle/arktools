@@ -14,7 +14,9 @@ Java_com_dt_arktools_utils_ArkUtils_stringFromJNI(
     return env->NewStringUTF(hello.c_str());
 }
 
-
+/**
+ * parse dex file;
+ */
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_dt_arktools_utils_ArkUtils_dexDump(
         JNIEnv *env,

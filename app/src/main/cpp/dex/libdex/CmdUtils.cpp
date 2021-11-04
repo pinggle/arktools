@@ -114,7 +114,6 @@ UnzipToFileResult dexOpenAndMap(const char *fileName, const char *tempFileName,
                                 MemMapping *pMap, bool quiet) {
     UnzipToFileResult result = kUTFRGenericFailure;
     int len = strlen(fileName);
-    char tempNameBuf[32];
     bool removeTemp = false;
     int fd = -1;
 
@@ -134,7 +133,7 @@ UnzipToFileResult dexOpenAndMap(const char *fileName, const char *tempFileName,
     result = kUTFRGenericFailure;
 
     /*
-     * Pop open the (presumed) DEX file.
+     * TODO: 1.open the (presumed) DEX file.
      */
     fd = open(fileName, O_RDONLY | O_BINARY);
     if (fd < 0) {
@@ -144,6 +143,7 @@ UnzipToFileResult dexOpenAndMap(const char *fileName, const char *tempFileName,
         goto bail;
     }
 
+    //TODO: 2.map file data;
     if (sysMapFileInShmemWritableReadOnly(fd, pMap) != 0) {
         LOGE("ERROR: Unable to map '%s'\n", fileName);
         goto bail;
@@ -158,6 +158,7 @@ UnzipToFileResult dexOpenAndMap(const char *fileName, const char *tempFileName,
      */
     sysChangeMapAccess(pMap->addr, pMap->length, true, pMap);
 
+    // TODO: 3.check header magic and file checksum;
     if (dexSwapAndVerifyIfNecessary((u1 *) pMap->addr, pMap->length)) {
         fprintf(stderr, "ERROR: Failed structural verification of '%s'\n",
                 fileName);

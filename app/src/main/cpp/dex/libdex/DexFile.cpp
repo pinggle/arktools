@@ -320,6 +320,7 @@ DexFile *dexFileParse(const u1 *data, size_t length, int flags) {
         goto bail;      /* bad file format */
     }
 
+    // TODO: 1.malloc memory to save dex info;
     pDexFile = (DexFile *) malloc(sizeof(DexFile));
     if (pDexFile == NULL)
         goto bail;      /* alloc failure */
@@ -327,6 +328,7 @@ DexFile *dexFileParse(const u1 *data, size_t length, int flags) {
 
     /*
      * Peel off the optimized header.
+     * TODO: 2.parse odex header info;
      */
     if (memcmp(data, DEX_OPT_MAGIC, 4) == 0) {
         magic = data;
@@ -355,9 +357,11 @@ DexFile *dexFileParse(const u1 *data, size_t length, int flags) {
         length = pDexFile->pOptHeader->dexLength;
     }
 
+    //TODO: 3.fill dex header info to struct;
     dexFileSetupBasicPointers(pDexFile, data);
     pHeader = pDexFile->pHeader;
 
+    //TODO: 4.check dex magic;
     if (!dexHasValidMagic(pHeader)) {
         goto bail;
     }

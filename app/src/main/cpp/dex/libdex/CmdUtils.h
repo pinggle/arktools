@@ -37,7 +37,7 @@
 enum UnzipToFileResult {
     kUTFRSuccess = 0,
     kUTFRGenericFailure,
-    kUTFRBadArgs,
+    kUTFRBadArgs,   // bad args;
     kUTFRNotZip,
     kUTFRNoClassesDex,
     kUTFROutputFileProblem,

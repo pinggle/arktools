@@ -2113,19 +2113,19 @@ void initOptions(const char *inputParam) {
     memset(&gOptions, 0, sizeof(gOptions));
     gOptions.verbose = true;
     gOptions.checksumOnly = true;
-// disassemble Dalvik instructions
+    // disassemble Dalvik instructions
     gOptions.disassemble = true;
     // dump outer file header
     gOptions.showFileHeaders = true;
-// dump section headers, i.e. all meta-data
+    // dump section headers, i.e. all meta-data
     gOptions.showSectionHeaders = true;
-// continue even if checksum is bad
+    // continue even if checksum is bad
     gOptions.ignoreBadChecksum = true;
 
 }
 
 /*
- * Process one file.
+ * Process one file.(just dex now)
  */
 int process(const char *fileName) {
     DexFile *pDexFile = NULL;
@@ -2135,6 +2135,7 @@ int process(const char *fileName) {
 
     LOGD("Processing '%s'...\n", fileName);
 
+    //TODO: 1.open and map file, check file-magic and file-checksum;
     if (dexOpenAndMap(fileName, gOptions.tempFileName, &map, false) != 0) {
         return result;
     }
