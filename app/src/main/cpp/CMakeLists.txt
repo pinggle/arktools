@@ -40,6 +40,7 @@ add_library( # Sets the name of the library.
         dex/libdex/OptInvocation.cpp
         dex/libdex/sha1.cpp
         dex/libdex/SysUtil.cpp
+        dex/liblog/log_main.cpp
         )
 
 # Searches for a specified prebuilt library and stores the path as a

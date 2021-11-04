@@ -2,23 +2,23 @@
 #include <string>
 
 #include "dex/DexDump.h"
-#include "liblog/log_main.h"
+#include "dex/liblog/log_main.h"
 
-static bool logEnable =false;
+static bool logEnable = false;
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_dt_arktools_MainActivity_stringFromJNI(
+Java_com_dt_arktools_utils_ArkUtils_stringFromJNI(
         JNIEnv *env,
-        jobject /* this */) {
+        jclass clazz) {
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
 }
 
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_dt_arktools_MainActivity_dexDump(
+Java_com_dt_arktools_utils_ArkUtils_dexDump(
         JNIEnv *env,
-        jobject /* this */,
+        jclass clazz,
         jstring inputDexPath,
         jstring inputParams) {
     const char *dexPath = env->GetStringUTFChars(inputDexPath, NULL);
@@ -35,8 +35,9 @@ Java_com_dt_arktools_MainActivity_dexDump(
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_dt_arktools_utils_LogInit(JNIEnv *env, jobject instance, jstring logFilePath,
-                                    jstring logName, jint logfileLevel, jint logScreenLevel) {
+Java_com_dt_arktools_utils_ArkUtils_LogInit(JNIEnv *env, jclass instance, jstring logFilePath,
+                                            jstring logName, jint logfileLevel,
+                                            jint logScreenLevel) {
     if (!logEnable) {
         const char *path = env->GetStringUTFChars(logFilePath, JNI_FALSE);
         const char *name = env->GetStringUTFChars(logName, JNI_FALSE);
@@ -51,7 +52,7 @@ Java_com_dt_arktools_utils_LogInit(JNIEnv *env, jobject instance, jstring logFil
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_dt_arktools_utils_log(JNIEnv *env, jclass type, jint _level, jstring _str) {
+Java_com_dt_arktools_utils_ArkUtils_log(JNIEnv *env, jclass type, jint _level, jstring _str) {
     if (!logEnable) {
         LOGE("log error! LogInit need");
         return;
@@ -64,7 +65,7 @@ Java_com_dt_arktools_utils_log(JNIEnv *env, jclass type, jint _level, jstring _s
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_dt_arktools_utils_logClose(JNIEnv *env, jclass type) {
+Java_com_dt_arktools_utils_ArkUtils_logClose(JNIEnv *env, jclass type) {
     _LogClose();
-    logEnable=false;
+    logEnable = false;
 }

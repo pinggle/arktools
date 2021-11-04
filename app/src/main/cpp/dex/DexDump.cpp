@@ -1934,7 +1934,7 @@ static u8 readSignedLittleEndian(const u1 **pData, u4 size) {
     u4 i;
 
     for (i = 0; i < size; i++) {
-        result = (result >> 8) | (((int64_t) * data++) << 56);
+        result = (result >> 8) | (((int64_t) *data++) << 56);
     }
 
     result >>= (8 - size) * 8;

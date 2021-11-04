@@ -31,7 +31,7 @@ long g_RollingPtr = 0;
 // 文件路径
 static std::string g_logFilePath;
 
-boolean _LogInit(const char *pFile, const char *filename, int logLevel, int printScreen) {
+bool _LogInit(const char *pFile, const char *filename, int logLevel, int printScreen) {
     g_RollingPtr = 0;
     g_log_file_level = logLevel;
     g_log_screen_level = printScreen;
@@ -107,7 +107,7 @@ void WriteTextLogBottom(int level, const char *log) {
                 LOGE("%s, fopen(w) %s fail, err:%d", __func__, g_logFilePath.c_str(), errno);
                 return;
             }
-            fprintf(fp, "%s, stat fail create logfile, errno:%d", __func__, errno);
+            fprintf(fp, "%s, stat fail create logfile, errno:%d\n", __func__, errno);
             fprintf(fp, "%s", log);
             fclose(fp);
             return;

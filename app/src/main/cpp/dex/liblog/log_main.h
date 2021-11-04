@@ -47,7 +47,6 @@
 #define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,TAG ,__VA_ARGS__) // 定义LOGF类型
 
 
-
 #define LOG_TEXT_MAX_LENGTH        (1024)  //  单条日志大小
 #define LOG_FILE_MAX_SIZE    (1024*1024*2) //  文件最大为2MB
 
