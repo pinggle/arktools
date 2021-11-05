@@ -33,6 +33,10 @@ public class ArkUtils {
         }
     }
 
+    public static native int javaAdd(int x, int y);
+
+    public static native String javaSayHi();
+
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.

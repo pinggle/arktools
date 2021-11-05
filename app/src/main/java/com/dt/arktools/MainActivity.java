@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = binding.sampleText;
         tv.setText(ArkUtils.stringFromJNI());
 
-        ArkUtils.dexDump("/sdcard/ark/classes.dex", "d");
+        //ArkUtils.dexDump("/sdcard/ark/classes.dex", "d");
+        ArkUtils.javaSayHi();
     }
 
 
