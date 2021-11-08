@@ -3,6 +3,8 @@
 
 #include "dex/DexDump.h"
 #include "dex/liblog/log_main.h"
+#include "test/Person.h"
+#include "test/Student.h"
 
 static bool logEnable = false;
 
@@ -79,6 +81,19 @@ static jint JNICALL cAdd(JNIEnv *env, jobject jobj, jint x, jint y) {
     return x + y;
 }
 
+static jint JNICALL cGetStudentAge(JNIEnv *env, jobject jobj, jint min, jint max) {
+    LOGI("cGetStudentAge input is : [%d , %d]", min, max);
+    Person *person = new (Student);
+    person->setAge(28);
+    int curAge = person->getAge();
+    delete (person);
+    if (curAge > min && curAge < max) {
+        return curAge;
+    }
+    return 0;
+}
+
+
 static jstring JNICALL cSayHi(JNIEnv *env, jobject jobj, jint x, jint y) {
     LOGI("cSayHi runs... will return a string in c");
     return env->NewStringUTF("hello from cSayHi");
@@ -91,9 +106,11 @@ static jstring JNICALL cSayHi(JNIEnv *env, jobject jobj, jint x, jint y) {
 
 */
 static const JNINativeMethod gMethods[] = {
-        {"javaAdd",   "(II)I",                (jint *) cAdd},
-        {"javaSayHi", "()Ljava/lang/String;", (jstring *) cSayHi}
+        {"javaAdd",           "(II)I",                (jint *) cAdd},
+        {"javaSayHi",         "()Ljava/lang/String;", (jstring *) cSayHi},
+        {"javaGetStudentAge", "(II)I",                (jstring *) cGetStudentAge}
 };
+
 
 static jclass myClass;
 // 这里是java调用C的存在Native方法的类路径
@@ -104,7 +121,7 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
     LOGI("jni onload called");
     JNIEnv *env = NULL; //注册时在JNIEnv中实现的，所以必须首先获取它
     jint result = -1;
-    if (vm->GetEnv((void **) &env, JNI_VERSION_1_4) != JNI_OK) { //从JavaVM获取JNIEnv，一般使用1.4的版本
+    if (vm->GetEnv((void **) &env, JNI_VERSION_1_6) != JNI_OK) { //从JavaVM获取JNIEnv，一般使用1.4的版本
         return -1;
     }
     // 获取映射的java类

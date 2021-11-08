@@ -12,6 +12,8 @@ public class ArkUtils {
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
+        // System.load need full path;
+        //System.load();
     }
 
     public enum LogLevel {
@@ -34,6 +36,8 @@ public class ArkUtils {
     }
 
     public static native int javaAdd(int x, int y);
+
+    public static native int javaGetStudentAge(int min, int max);
 
     public static native String javaSayHi();
 

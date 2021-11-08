@@ -41,6 +41,8 @@ add_library( # Sets the name of the library.
         dex/libdex/sha1.cpp
         dex/libdex/SysUtil.cpp
         dex/liblog/log_main.cpp
+        test/Person.cpp
+        test/Student.cpp
         )
 
 # Searches for a specified prebuilt library and stores the path as a

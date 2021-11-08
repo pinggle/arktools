@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = binding.sampleText;
-        tv.setText(ArkUtils.stringFromJNI());
+        tv.setText(ArkUtils.javaSayHi() + String.valueOf(ArkUtils.javaGetStudentAge(0, 100)));
 
         //ArkUtils.dexDump("/sdcard/ark/classes.dex", "d");
-        ArkUtils.javaSayHi();
+
     }
 
 
