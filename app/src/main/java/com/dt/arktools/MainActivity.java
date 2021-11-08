@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(ArkUtils.javaSayHi() + String.valueOf(ArkUtils.javaGetStudentAge(0, 100)));
 
 
+
         //ArkUtils.dexDump("/sdcard/ark/classes.dex", "d");
 
     }
